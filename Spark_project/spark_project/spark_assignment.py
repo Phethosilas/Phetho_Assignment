@@ -26,15 +26,6 @@ def write_to_db():
         .load("C:/dev\projects/Phetho_Assignment/Spark_project/Files/books.csv")
 
     df.show(5)
-    '''df\
-        .write\
-        .format("jdbc").\
-        option("url" , URL)\
-        .option("dbtable" , TABLE)\
-        .option("user" , PSQL_USERNAME)\
-        .option("password" , PSQL_PASSWORD)\
-        .mode("append")\
-        .save()'''
     spark.stop()
 
 
@@ -46,9 +37,16 @@ def read_from_db():
         .master("local")\
         .appName("PySpark_Postgres_test")\
         .getOrCreate()
-    df = spark.read.format("jdbc").option("url", "jdbc:postgresql://localhost:5432/postgress") \
-        .option("driver", "org.postgresql.Driver").option("dbtable", "mytable") \
-        .option("user", "postgres").option("password", "pass").load()
+
+    df = spark\
+        .read\
+        .format("jdbc")\
+        .option("url", "jdbc:postgresql://localhost:5432/postgress") \
+        .option("driver", "org.postgresql.Driver")\
+        .option("dbtable", "book") \
+        .option("user", "postgres")\
+        .option("password", "pass")\
+        .load()
     df.show(2)
 
     spark.stop()
