@@ -7,7 +7,7 @@ PSQL_DBNAME = "postgres"
 PSQL_USERNAME = "postgres"
 PSQL_PASSWORD = "pass"
 URL= f"jdbc:postgresql://{PSQL_SERVERNAME}:{PSQL_PORTNUMBER}/{PSQL_DBNAME}"
-TABLE= "books"
+TABLE= "book"
 
 
 # reading from CSV to Postgress DB in docker
