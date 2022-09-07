@@ -1,4 +1,8 @@
-from pyspark.sql import SparkSession
+from pyspark.sql.session import SparkSession
+from Spark_project.utils.spark_helper import SparkHelper
+
+
+spark: SparkSession = SparkHelper.get_spark_session()
 
 #Connection details
 PSQL_SERVERNAME = "localhost"
@@ -10,38 +14,14 @@ URL= f"jdbc:postgresql://{PSQL_SERVERNAME}:{PSQL_PORTNUMBER}/{PSQL_DBNAME}"
 TABLE= "book"
 
 
-# reading from CSV to Postgress DB in docker
-
-def write_to_db():
-    spark = SparkSession \
-        .builder \
-        .appName("Spark Assignment to read from postgress") \
-        .master("local[*]") \
-        .getOrCreate()
-    df = spark \
-        .read \
-        .format("csv") \
-        .option("header", True)\
-        .option("inferSchema" , True) \
-        .load("C:/dev\projects/Phetho_Assignment/Spark_project/Files/books.csv")
-
-    df.show(5)
-    spark.stop()
-
-
-
 #reading from a postgress db
 def read_from_db():
-    spark = SparkSession.builder\
-        .config("spark.jars", "/dev/tools/postgresql-42.5.0.jar") \
-        .master("local")\
-        .appName("PySpark_Postgres_test")\
-        .getOrCreate()
+
 
     df = spark\
         .read\
         .format("jdbc")\
-        .option("url", "jdbc:postgresql://localhost:5432/postgress") \
+        .option("url", "jdbc:postgresql://localhost:5432/postgres") \
         .option("driver", "org.postgresql.Driver")\
         .option("dbtable", "book") \
         .option("user", "postgres")\
@@ -49,7 +29,5 @@ def read_from_db():
         .load()
     df.show(2)
 
-    spark.stop()
 if __name__ == "__main__":
-    write_to_db()
     read_from_db()

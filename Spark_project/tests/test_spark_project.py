@@ -1,20 +1,22 @@
-from pyspark.sql import SparkSession
-import unittest
+from pyspark.sql.session import SparkSession
+from Spark_project.utils.spark_helper import SparkHelper
 
-"test the function that read from postgress db"
 
-def test_spark_assignment():
-    ''' spark = SparkSession \
-            .builder \
-            .appName("Spark Assignment to read from postgress") \
-            .master("local[*]") \
-            .getOrCreate()
+spark: SparkSession = SparkHelper.get_spark_session()
 
-        df = spark \
-            .read \
-            .format("csv") \
-            .option("header", True) \
-            .option("inferSchema", True) \
-            .load("C:/dev\projects/Phetho_Assignment/Spark_project/Files/books.csv")
-        spark.stop()'''
+
+def test_wrong_db():
+
+    assert True
+
+def test_wrong_table():
+
+    assert True
+
+def test_wrong_passwrd():
+
+    assert True
+
+def test_wrong_db():
+
     assert True
