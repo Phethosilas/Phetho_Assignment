@@ -21,11 +21,11 @@ def read_from_db():
     df = spark\
         .read\
         .format("jdbc")\
-        .option("url", "jdbc:postgresql://localhost:5432/postgres") \
+        .option("url", f'{URL}') \
         .option("driver", "org.postgresql.Driver")\
-        .option("dbtable", "book") \
-        .option("user", "postgres")\
-        .option("password", "pass")\
+        .option("dbtable", f'{TABLE}') \
+        .option("user", f'{PSQL_USERNAME}')\
+        .option("password", f'{PSQL_PASSWORD}')\
         .load()
     df.show(2)
 
