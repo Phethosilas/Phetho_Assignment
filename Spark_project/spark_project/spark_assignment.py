@@ -4,30 +4,39 @@ from Spark_project.utils.spark_helper import SparkHelper
 
 spark: SparkSession = SparkHelper.get_spark_session()
 
-#Connection details
-PSQL_SERVERNAME = "localhost"
-PSQL_PORTNUMBER = 5432
-PSQL_DBNAME = "postgres"
-PSQL_USERNAME = "postgres"
-PSQL_PASSWORD = "pass"
-URL= f"jdbc:postgresql://{PSQL_SERVERNAME}:{PSQL_PORTNUMBER}/{PSQL_DBNAME}"
-TABLE= "book"
+
+class Runner:
+    def __init__(self):
+        self.run=self.DataReader( "localhost", 5432,"postgres", "postgres","pass", "jdbc:postgresql://localhost:5432/postgres","book")
+
+    class DataReader():
+        # init method with db connection parameters
+        def __init__(self, PSQL_SERVERNAME, PSQL_PORTNUMBER, PSQL_DBNAME, PSQL_USERNAME, PSQL_PASSWORD, URL, TABLE):
+            self.PSQL_SERVERNAME = PSQL_SERVERNAME
+            self.PSQL_PORTNUMBER = PSQL_PORTNUMBER
+            self.PSQL_DBNAME = PSQL_DBNAME
+            self.PSQL_USERNAME = PSQL_USERNAME
+            self.PSQL_PASSWORD = PSQL_PASSWORD
+            self.URL = URL
+            self.TABLE = TABLE
+
+        def read(self):
+            df = spark \
+                .read \
+                .format("jdbc") \
+                .option("url", f'{self.URL}') \
+                .option("driver", "org.postgresql.Driver") \
+                .option("dbtable", f'{self.TABLE}') \
+                .option("user", f'{self.PSQL_USERNAME}') \
+                .option("password", f'{self.PSQL_PASSWORD}') \
+                .load()
+            #df.write.format("parquet").save("../files/dbfile.parquet")
 
 
-#reading from a postgress db
-def read_from_db():
-
-
-    df = spark\
-        .read\
-        .format("jdbc")\
-        .option("url", f'{URL}') \
-        .option("driver", "org.postgresql.Driver")\
-        .option("dbtable", f'{TABLE}') \
-        .option("user", f'{PSQL_USERNAME}')\
-        .option("password", f'{PSQL_PASSWORD}')\
-        .load()
-    df.show(2)
 
 if __name__ == "__main__":
-    read_from_db()
+    # create a object of Runner class
+    rn=Runner()
+    # create a object of DataReader class and calling the read function from DataReader class
+    data=rn.run.read()
+

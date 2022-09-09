@@ -17,6 +17,6 @@ def test_wrong_passwrd():
 
     assert True
 
-def test_wrong_db():
+def test_wrong_portnumber():
 
     assert True
