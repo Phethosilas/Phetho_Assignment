@@ -35,7 +35,7 @@ class Runner:
                 .option("user", f'{self.PSQL_USERNAME}') \
                 .option("password", f'{self.PSQL_PASSWORD}') \
                 .load()
-            #df.write.format("parquet").save("../files/dbfile.parquet")
+            df.write.format("parquet").save("../files/dbfile.parquet")
 
 
 
