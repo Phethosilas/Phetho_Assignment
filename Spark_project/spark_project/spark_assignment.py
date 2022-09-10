@@ -7,7 +7,12 @@ spark: SparkSession = SparkHelper.get_spark_session()
 
 class Runner:
     def __init__(self):
-        self.run=self.DataReader( "localhost", 5432,"postgres", "postgres","pass", "jdbc:postgresql://localhost:5432/postgres","book")
+        self.run=self.DataReader( "localhost",
+                                  5432,"postgres",
+                                  "postgres",
+                                  "pass",
+                                  "jdbc:postgresql://localhost:5432/postgres",
+                                  "book")
 
     class DataReader():
         # init method with db connection parameters
