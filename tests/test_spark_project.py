@@ -1,7 +1,7 @@
 from pyspark.sql.session import SparkSession
-from Spark_project.utils.spark_helper import SparkHelper
-from Spark_project.spark_project.spark_assignment import Runner
 
+from spark_project.spark_assignment import Runner
+from utils.spark_helper import SparkHelper
 
 spark: SparkSession = SparkHelper.get_spark_session()
 

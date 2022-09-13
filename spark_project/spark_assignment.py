@@ -1,11 +1,8 @@
 from pyspark.sql.session import SparkSession
-from Spark_project.utils.spark_helper import SparkHelper
-
-
-spark: SparkSession = SparkHelper.get_spark_session()
 
 
 class Runner:
+
     def __init__(self):
         self.run=self.DataReader( "localhost",
                                   5432,"postgres",
@@ -36,12 +33,3 @@ class Runner:
                 .option("password", f'{self.PSQL_PASSWORD}') \
                 .load()
             df.write.format("parquet").save("../files/dbfile.parquet")
-
-
-
-if __name__ == "__main__":
-    # create a object of Runner class
-    rn=Runner()
-    # create a object of DataReader class and calling the read function from DataReader class
-    data=rn.run.read()
-

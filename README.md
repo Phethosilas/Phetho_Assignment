@@ -1,3 +1,6 @@
+
+![image_of_prohect](docs/project_image.png)
+
 Part 1
 
 Create a new github project (give me and gavin access)
