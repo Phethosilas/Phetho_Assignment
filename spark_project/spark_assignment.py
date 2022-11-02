@@ -1,4 +1,4 @@
-from pyspark.sql.session import SparkSession
+
 
 
 class Runner:
@@ -25,8 +25,8 @@ class Runner:
         def read(self):
             df = spark \
                 .read \
-                .format("jdbc") \
-                .option("url", f'{self.URL}') \
+                .format("csv") \
+                .option("header", f'true') \
                 .option("driver", "org.postgresql.Driver") \
                 .option("dbtable", f'{self.TABLE}') \
                 .option("user", f'{self.PSQL_USERNAME}') \
