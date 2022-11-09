@@ -1,15 +1,18 @@
 from pyspark.sql.session import SparkSession
+from utils.spark_helper import SparkHelper
+
+spark: SparkSession = SparkHelper.get_spark_session()
 
 
 class Runner:
 
     def __init__(self):
-        self.run=self.DataReader( "localhost",
-                                  5432,"postgres",
-                                  "postgres",
-                                  "pass",
-                                  "jdbc:postgresql://localhost:5432/postgres",
-                                  "book")
+        self.run = self.DataReader("localhost",
+                                   5432, "postgres",
+                                   "postgres",
+                                   "pass",
+                                   "jdbc:postgresql://localhost:5432/postgres",
+                                   "book")
 
     class DataReader():
         # init method with db connection parameters
@@ -21,6 +24,8 @@ class Runner:
             self.PSQL_PASSWORD = PSQL_PASSWORD
             self.URL = URL
             self.TABLE = TABLE
+            if self.TABLE is None:
+                raise Exception("table name required")
 
         def read(self):
             df = spark \
@@ -32,4 +37,11 @@ class Runner:
                 .option("user", f'{self.PSQL_USERNAME}') \
                 .option("password", f'{self.PSQL_PASSWORD}') \
                 .load()
-            df.write.format("parquet").save("../files/dbfile.parquet")
+            return df.show(100)
+if __name__ == '__main__':
+    Runner().DataReader("localhost",
+                                   5432, "postgres",
+                                   "postgres",
+                                   "pass",
+                                   "jdbc:postgresql://localhost:5432/postgres",
+                                   "book").read()

@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$" />
     <content url="file://$MODULE_DIR$/../../tools/spark/spark-3.1.2-bin-hadoop3.2/python" />
     <content url="jar://$MODULE_DIR$/../../tools/spark/spark-3.1.2-bin-hadoop3.2/python/lib/py4j-0.10.9-src.zip!/" />
-    <orderEntry type="jdk" jdkName="Poetry (python_assignment)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Poetry (Phetho_Assignment)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
