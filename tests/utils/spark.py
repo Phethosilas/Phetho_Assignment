@@ -22,9 +22,6 @@ class SparkHelper:
         sparkConf.set("spark.cleaner.referenceTracking.cleanCheckpoints", True)
         # Added because there is a an implicit offset conversion that happens if you dont use the dev container
         sparkConf.set("spark.sql.session.timeZone", "UTC")
-
-
-
         spark = (SparkSession.builder.config(conf=sparkConf).getOrCreate())
         spark.sparkContext.setLogLevel('ERROR')
         SparkHelper.spark = spark
